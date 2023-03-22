@@ -57,7 +57,7 @@ function Form() {
       setErrors({ ...errors, image: "El campo está vacío" })
     }
 
-    if (!form.life.trim()) {  //el trim() evalua que tenga información, que no haya espacios en blanco
+    if (!form.life.trim()) { 
       setErrors({ ...errors, life: "" })
     } else if (!regexNumbers.test(form.life.trim())) {
       setErrors({ ...errors, life: "El campo vida solo acepta números" })
@@ -65,7 +65,7 @@ function Form() {
       setErrors({ ...errors, life: "La vida está vacía" })
     }
 
-    if (!form.attack.trim()) {  //el trim() evalua que tenga información, que no haya espacios en blanco
+    if (!form.attack.trim()) { 
       setErrors({ ...errors, attack: "" })
     } else if (!regexNumbers.test(form.attack.trim())) {
       setErrors({ ...errors, attack: "El campo ataque solo acepta números" })
@@ -73,7 +73,7 @@ function Form() {
       setErrors({ ...errors, attack: "El ataque está vacío" })
     }
 
-    if (!form.defense.trim()) {  //el trim() evalua que tenga información, que no haya espacios en blanco
+    if (!form.defense.trim()) {  
       setErrors({ ...errors, defense: "" })
     } else if (!regexNumbers.test(form.defense.trim())) {
       setErrors({ ...errors, defense: "El campo defensa solo números" })
@@ -81,7 +81,7 @@ function Form() {
       setErrors({ ...errors, defense: "El campo defensa está vacío" })
     }
 
-    if (!form.speed.trim()) {  //el trim() evalua que tenga información, que no haya espacios en blanco
+    if (!form.speed.trim()) { 
       setErrors({ ...errors, speed: "" })
     } else if (!regexNumbers.test(form.speed.trim())) {
       setErrors({ ...errors, speed: "El campo velocidad solo números" })
@@ -89,7 +89,7 @@ function Form() {
       setErrors({ ...errors, speed: "El campo velocidad está vacío" })
     }
 
-    if (!form.height.trim()) {  //el trim() evalua que tenga información, que no haya espacios en blanco
+    if (!form.height.trim()) { 
       setErrors({ ...errors, height: "" })
     } else if (!regexNumbers.test(form.height.trim())) {
       setErrors({ ...errors, height: "El campo altura solo números" })
@@ -97,7 +97,7 @@ function Form() {
       setErrors({ ...errors, height: "El campo altura está vacío" })
     }
 
-    if (!form.weight.trim()) {  //el trim() evalua que tenga información, que no haya espacios en blanco
+    if (!form.weight.trim()) { 
       setErrors({ ...errors, weight: "" })
     } else if (!regexNumbers.test(form.weight.trim())) {
       setErrors({ ...errors, weight: "El campo peso solo números" })
@@ -105,7 +105,7 @@ function Form() {
       setErrors({ ...errors, weight: "El campo peso está vacío" })
     }
 
-    if (!form.types.length === 0) {  //el trim() evalua que tenga información, que no haya espacios en blanco
+    if (!form.types.length === 0) { 
       setErrors({ ...errors, types: "Se requiere mínimo un tipo" })
 
 
