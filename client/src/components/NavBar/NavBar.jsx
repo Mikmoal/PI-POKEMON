@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
-import SearchBar from "../SearchBar";
-import FilterTypes from "../FilterTypes.css/FilterTypes";
+import SearchBar from "../SearchBar/SearchBar";
+import FilterTypes from "../FilterTypes/FilterTypes";
 import Orders from '..Orders';
 import FilterPokemons from '../FilterPokemons/FilterPokemons'; //aqui crear componentes restantes
 import style from "./NavBar.module.css"
@@ -15,10 +15,10 @@ const NavBar = ({ paginate }) => {
             <Orders
                 paginate={paginate} />
 
-            <FilterBreeds
+            <FilterPokemons
                 paginate={paginate} />
 
-            <FilterTemperament
+            <FilterTypes
                 paginate={paginate}
             />
             <Link to="/newPokemon">New Pokemon</Link>
