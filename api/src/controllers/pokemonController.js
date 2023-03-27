@@ -2,24 +2,38 @@ require("dotenv").config();
 const axios = require("axios");
 const { Pokemon, Type } = require("../db");
 
+
 const getPokemonApiInfo = async () => {
-  const apiPokemons = await axios.get(`https://pokeapi.co/api/v2/pokemon`);
-  const apiInfo = await apiPokemons.data.results;
- 
-  return apiInfo;
+  const apiPokemons = (
+    await axios.get(`https://pokeapi.co/api/v2/pokemon?limit=20`)
+  ).data.results;
+
+  const apiDetailed2 = [];
+  for (let index = 0; index < apiPokemons.length; index++) {
+    const pokemonDetailed = (await axios.get(apiPokemons[index].url)).data;
+    const types = pokemonDetailed.types.map((el) => {
+      return el.type.name;
+    });
+    const pokemon = {
+      image: pokemonDetailed.sprites.other.home.front_default,
+      name: pokemonDetailed.name,
+      types: types,
+    };
+    apiDetailed2.push(pokemon);
+  }
+
+  return apiDetailed2;
 };
 
 const getPokemonDbInfo = async () => {
   const dbPokemons = await Pokemon.findAll({
-    include: [
-      {
-        model: Type,
-        attributes: ["name"],
-        through: {
-          attributes: [],
-        },
+    include: {
+      attributes: ["name"],
+      model: Type,
+      through: {
+        attributes: [],
       },
-    ],
+    },
   });
 
   const dbInfo = dbPokemons.map((e) => {
@@ -44,7 +58,7 @@ const getAllPokemons = async () => {
   const dbPokemons = getPokemonDbInfo();
   const apiPokemons = getPokemonApiInfo();
 
-  return [...dbPokemons, ...apiPokemons];
+  return apiPokemons;
 };
 
 const searchPokemonByName = async (name) => {
@@ -97,8 +111,8 @@ const createPokemonController = async (
     speed,
     height,
     weight,
-  })
-  await newPokemon.addType(types)
+  });
+  await newPokemon.addType(types);
 
   return newPokemon;
 };
