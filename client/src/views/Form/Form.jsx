@@ -1,4 +1,4 @@
-import { useForm } from "../../hook/useForm";
+import { useForm } from "../../hook/useForm.js";
 
 const initialForm = {
   name: "",
@@ -12,95 +12,82 @@ const initialForm = {
   types: []
 }
 
-const validateForm = (form) => {
+const validationsForm = (form) => {
   let regexName = /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/;  //expresion regular valida que solo se acepten mayúsculas y minúsculas            
   let regexNumbers = /^[0-9]\d*(\.\d+)?$/; //  /[0-9]/ es otra expresión regular para numeros
-
+  let errors = {};
 
   if (!form.name.trim()) {  //el trim() evalua que tenga información, que no haya espacios en blanco
-    setErrors({ ...errors, name: "" })
+    errors.name = "El campo nombre es requerido"
   } else if (!regexName.test(form.name.trim())) {
-    setErrors({ ...errors, name: "El campo 'Nombre' solo acepta letras y espacios en blanco" })
+    errors.name = "El campo 'Nombre' solo acepta letras y espacios en blanco"
   } else if (form.name === "") {
-    setErrors({ ...errors, name: "El nombre está vacío" })
+    errors.name = "El nombre está vacío"
   }
 
   if (!form.image) {
-    setErrors({ ...errors, image: "El campo es requerido" })
+    errors.image = "El campo es requerido"
   } else if (form.image === "") {
-    setErrors({ ...errors, image: "El campo está vacío" })
+    errors.image = "El campo está vacío"
   }
 
   if (!form.life.trim()) {
-    setErrors({ ...errors, life: "" })
+    errors.life = "El campo vida es requerido"
   } else if (!regexNumbers.test(form.life.trim())) {
-    setErrors({ ...errors, life: "El campo vida solo acepta números" })
+    errors.life = "El campo vida solo acepta números"
   } else if (form.life === "") {
-    setErrors({ ...errors, life: "La vida está vacía" })
+    errors.life = "La vida está vacía"
   }
 
   if (!form.attack.trim()) {
-    setErrors({ ...errors, attack: "" })
+    errors.attack = "El campo ataque es requerido"
   } else if (!regexNumbers.test(form.attack.trim())) {
-    setErrors({ ...errors, attack: "El campo ataque solo acepta números" })
+    errors.attack = "El campo ataque solo acepta números"
   } else if (form.attack === "") {
-    setErrors({ ...errors, attack: "El ataque está vacío" })
+    errors.attack = "El ataque está vacío"
   }
 
   if (!form.defense.trim()) {
-    setErrors({ ...errors, defense: "" })
+    errors.defense = "El campo defensa es requerido"
   } else if (!regexNumbers.test(form.defense.trim())) {
-    setErrors({ ...errors, defense: "El campo defensa solo números" })
+    errors.defense = "El campo defensa solo números"
   } else if (form.defense === "") {
-    setErrors({ ...errors, defense: "El campo defensa está vacío" })
+    errors.defense = "El campo defensa está vacío"
   }
 
   if (!form.speed.trim()) {
-    setErrors({ ...errors, speed: "" })
+    errors.speed = "El campo velocidad es requerido"
   } else if (!regexNumbers.test(form.speed.trim())) {
-    setErrors({ ...errors, speed: "El campo velocidad solo números" })
+    errors.speed = "El campo velocidad solo números"
   } else if (form.speed === "") {
-    setErrors({ ...errors, speed: "El campo velocidad está vacío" })
+    errors.speed = "El campo velocidad está vacío"
   }
 
   if (!form.height.trim()) {
-    setErrors({ ...errors, height: "" })
+    errors.height = "El campo altura es requerido"
   } else if (!regexNumbers.test(form.height.trim())) {
-    setErrors({ ...errors, height: "El campo altura solo números" })
+    errors.height = "El campo altura solo números"
   } else if (form.height === "") {
-    setErrors({ ...errors, height: "El campo altura está vacío" })
+    errors.height = "El campo altura está vacío"
   }
 
   if (!form.weight.trim()) {
-    setErrors({ ...errors, weight: "" })
+    errors.weight = "El campo peso es requerido"
   } else if (!regexNumbers.test(form.weight.trim())) {
-    setErrors({ ...errors, weight: "El campo peso solo números" })
+    errors.weight = "El campo peso solo números"
   } else if (form.weight === "") {
-    setErrors({ ...errors, weight: "El campo peso está vacío" })
+    errors.weight = "El campo peso está vacío"
   }
 
-  if (!form.types.length === 0) {
-    setErrors({ ...errors, types: "Se requiere mínimo un tipo" })
+  if (form.types.length === 0) {
+    errors.types = "Se requiere mínimo un tipo"
+  }
 
-
-    // if (!form.life_span_max) {
-    //   errors.life_span_max = "El campo es requerido";
-    // } else if (!regexNumbers.test(form.life_span_max.trim())) {  //validación life_span_max
-    //   errors.life_span_max = "Solo números"
-    // } else if (parseInt(form.life_span_max) <= parseInt(form.life_span_min)) {
-    //   errors.life_span_max = "La esperanza máxima de vida no debe ser menor a la mínima"
-    // } else if (form.life_span_max > 16) {
-    //   errors.life_span_max = "La esperanza máxima de vida no debe ser mayor a 16 años"
-    // }
     return errors
-  }
-
-
 }
 
 function Form() {
-
-  const {                        // se hace destructuracion de useForm       
+  const {                        // destructuracion de useForm       
     form,
     errors,
     type,
@@ -109,57 +96,90 @@ function Form() {
     handleTypes,
     removeTypes,
     handleSubmit,
-  } = useForm(initialForm, validateForm); // useForm tiene los valores iniciales del formulario y la validaciones
+  } = useForm(initialForm, validationsForm); // useForm tiene los valores iniciales del formulario y la validaciones
 
+  
   return (
     <form onSubmit={handleSubmit}>
       <div>
         <label>Nombre</label>
-        <input type="text" value={form.name} onChange={changeHandler} name="name" />
+        <input type="text" onChange={handleChange} onBlur={handleBlur} name="name" value={form.name} />
         {errors.name && <span>{errors.name}</span>}
       </div>
 
       <div>
         <label>Imagen</label>
-        <input type="text" value={form.image} onChange={changeHandler} name="image" />
+        <input                                          //input image
+          type="text"
+          name="image"
+          placeholder="image or url-image"
+          onBlur={handleBlur}
+          onChange={handleChange}
+          value={form.image}
+          require='true'
+        />
+        {errors.image && <p>{errors.image}</p>}
       </div>
 
       <div>
         <label>Vida</label>
-        <input type="text" value={form.life} onChange={changeHandler} name="life" />
+        <input type="text" value={form.life} onBlur={handleBlur} onChange={handleChange} require='true' name="life" />
+        {errors.life && <p>{errors.life}</p>}
       </div>
 
       <div>
         <label>Ataque</label>
-        <input type="text" value={form.attack} onChange={changeHandler} name="attack" />
+        <input type="text" value={form.attack} onBlur={handleBlur} onChange={handleChange} require='true' name="attack" />
+        {errors.attack && <p>{errors.attack}</p>}
       </div>
 
       <div>
         <label>Defensa</label>
-        <input type="text" value={form.defense} onChange={changeHandler} name="defense" />
+        <input type="text" value={form.defense} onBlur={handleBlur} onChange={handleChange} require='true' name="defense" />
+        {errors.defense && <p>{errors.defense}</p>}
       </div>
 
       <div>
         <label>Velocidad (si tiene)</label>
-        <input type="text" value={form.speed} onChange={changeHandler} name="speed" />
+        <input type="text" value={form.speed} onBlur={handleBlur} onChange={handleChange} require='true' name="speed" />
+        {errors.speed && <p>{errors.speed}</p>}
       </div>
 
       <div>
         <label>Altura (si tiene)</label>
-        <input type="text" value={form.height} onChange={changeHandler} name="height" />
+        <input type="text" value={form.height} onBlur={handleBlur} onChange={handleChange} require='true' name="height" />
+        {errors.height && <p>{errors.height}</p>}
       </div>
 
       <div>
         <label>Peso (si tiene)</label>
-        <input type="text" value={form.weight} onChange={changeHandler} name="weight" />
+        <input type="text" value={form.weight} onBlur={handleBlur} onChange={handleChange} require='true' name="weight" />
+        {errors.weight && <p>{errors.weight}</p>}
       </div>
 
       <div>
+
         <label>Tipo(s)</label>
-        <input type="text" value={form.types} onChange={changeHandler} name="types" />
+        <select onChange={handleTypes} onBlur={handleBlur} defaultValue={'Chose an option'}>
+          <option >Types</option>
+          {type.map((e, index) => (
+            <option value={e.name} name='types' key={index}>{e.name}</option>
+          ))}
+        </select>
+
+        {errors.types && <p>{errors.types}</p>}
+
       </div>
 
-      <button>Submit</button>
+      <div>
+        {form.types.map((c, index) => (
+          <button value={c}  onClick={removeTypes} key={index}>x  {c}</button>
+        ))}
+      </div>
+
+      <div>
+        <input type="submit" value="Create" />
+      </div>
     </form>
   )
 }

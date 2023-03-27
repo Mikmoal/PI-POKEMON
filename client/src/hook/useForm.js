@@ -7,9 +7,8 @@ export const useForm = (initialForm, validateForm) => {
   // por parámetros llega el estado inicial y la funcion validateForm(son todas las validaciones)
   const [form, setForm] = useState(initialForm); // el estado inicial se reciben por parámetros
   const [errors, setErrors] = useState({}); // se usa para los errores, se inicia como un objeto vacío, el cual se llenara de errores. Si el el objeto está vacío entonces no hay errores
-
-  var namePokemon = useSelector((state) => state.pokemonsClean);
-  console.log(namePokemon);
+  const [loading, setLoading] = useState(false);
+  const [response, setResponse] = useState(null);
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -21,7 +20,7 @@ export const useForm = (initialForm, validateForm) => {
     dispatch(getPokemons());
   }, [dispatch]);
 
-  const type = useSelector((state) => state.types).sort((a, b) => {
+  const type = useSelector((state) => state.typesState).sort((a, b) => {
     if (a.name > b.name) {
       return 1;
     }
@@ -32,22 +31,21 @@ export const useForm = (initialForm, validateForm) => {
   });
   console.log(type);
 
+  var namePokemon = useSelector((state) => state.pokemonsClean);
+  console.log(namePokemon);
+
   const handleChange = (e) => {
-    //esta función se liga al value de los inputs
+    const { name, value } = e.target;
+
+    validateForm({
+      ...form,
+      [name]: value,
+    });
     setForm({
-      ...form, //se pasa una copia del formulario
-      [e.target.name]: e.target.value, //se hace el cambio por el evento que entra por parametro
+      ...form,
+      [name]: value, //se hace el cambio por el evento que entra por parametro
     });
   };
-  //   const changeHandler = (event) => { // código de Vega
-  //     const property = event.target.name
-  //     const value = event.target.value
-
-  //     validate({ ...form, [property]: value })
-
-  //     setForm({ ...form, [property]: value })
-
-  //   }
 
   const handleBlur = (e) => {
     // esta función lanza las validaciones al perder el foco las propiedades del formulario.
@@ -87,20 +85,21 @@ export const useForm = (initialForm, validateForm) => {
     }
     if (Object.keys(errors).length > 0) {
       //preguntamos si el objeto errores esta vacío, si se cumple se procesa
-      alert("Falta completar campos por completar o hay un error");
+      alert("Faltan campos por completar o hay un error");
     } else if (
-      form.name === "" &&
-      form.image === "" && //si hay campos vacíos no prosigue
-      form.life === "" &&
-      form.attack === "" &&
-      form.defense === "" &&
-      form.speed === "" &&
-      form.height === "" &&
-      form.weight === "" &&
+      form.name === "" ||
+      form.image === "" || //si hay campos vacíos no prosigue
+      form.life === "" ||
+      form.attack === "" ||
+      form.defense === "" ||
+      form.speed === "" ||
+      form.height === "" ||
+      form.weight === "" ||
       !form.types.length
     ) {
       return alert("Hay campos sin completar");
     } else {
+      console.log(form);
       dispatch(createPokemon(form));
       alert("Pokemon created"); //crea el pokemon y devuelve al home
       setForm({
@@ -122,7 +121,7 @@ export const useForm = (initialForm, validateForm) => {
     form,
     errors,
     type,
-    namePokemon,
+    // namePokemon,
     handleChange,
     handleBlur,
     handleTypes,

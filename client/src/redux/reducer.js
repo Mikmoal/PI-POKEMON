@@ -9,14 +9,14 @@ import {
   GET_TYPES,
   ORDER_BY,
   ADD_POKEMON,
-} from "../actions/actions";
+} from "./actions";
 import { A_Z, Z_A } from "../constants";
 
 const initialState = {
   pokemons: [],
   pokemonsDetail: [],
   pokemonsClean: [],
-  types: [],
+  typesState: [],
   empty: [],
   newPokemon: {},
   error: "",
@@ -29,6 +29,8 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         pokemons: action.payload,
+        pokemonsClean: action.payload,
+        error: "",
       };
     case GET_SEARCH:
       return {
@@ -38,7 +40,7 @@ const reducer = (state = initialState, action) => {
     case GET_TYPES:
       return {
         ...state,
-        types: action.payload,
+        typesState: action.payload,
       };
     case ORDER_BY:
       let orderAz = [...state.pokemons];
@@ -52,14 +54,6 @@ const reducer = (state = initialState, action) => {
             if (a.name > b.name) {
               return -1;
             } else return 1;
-          case WEIGHT_MAX:
-            if (a.weightMax > b.weightMax) {
-              return -1;
-            } else return 1;
-          case WEIGHT_MIN:
-            if (a.weightMin < b.weightMin) {
-              return -1;
-            } else return 1;
           default:
             return 0;
         }
@@ -69,7 +63,7 @@ const reducer = (state = initialState, action) => {
         pokemons: orderAz,
       };
     case FILTER_TYPE:
-      let allTypes = [...state.breedsClean];
+      let allTypes = [...state.pokemonsClean]; // O typesState ??????
       //if(action.payload === 'All Temperaments') return {...state, breeds: state.breeds}
       let aux2 =
         action.payload === "All Types"
@@ -81,19 +75,16 @@ const reducer = (state = initialState, action) => {
         pokemons: aux2,
       };
     case FILTER_POKEMON:
-      let allPokemons = [...state.breedsClean];
+      let allPokemons = [...state.pokemonsClean];
       let aux;
       console.log(allPokemons);
       if (action.payload === "All Pokemons")
         return { ...state, pokemons: allPokemons };
-      if (action.payload === "Pokemons") {
+      if (action.payload === "Pokemons api") {
         aux = allPokemons.filter((e) => Number(e.id));
       }
       if (action.payload === "New Pokemons") {
         aux = allPokemons.filter((e) => !Number(e.id));
-      }
-      if (action.payload === "Weight -10") {
-        aux = allPokemons.filter((e) => e.weightMin > 10);
       }
 
       console.log(aux);
@@ -111,11 +102,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         newPokemon: action.payload,
       };
-    case FAIL:
-      return {
-        ...state,
-        error: action.payload,
-      };
+    // case FAIL:
+    //   return {
+    //     ...state,
+    //     error: action.payload,
+    //   };
     case LOADING:
       return {
         ...state,
@@ -124,7 +115,7 @@ const reducer = (state = initialState, action) => {
     case CLEAN:
       return {
         ...state,
-        breedsDetail: [],
+        pokemonsDetail: [],
       };
     default:
       return { ...state };

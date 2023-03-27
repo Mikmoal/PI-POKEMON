@@ -4,3 +4,19 @@
     height: fit-content;
     border-radius: 10px;
 }
+.imagenP {
+    margin: 10px auto;
+    border-radius: 10px;
+    border: 1px solid #999;
+    padding: 13px;
+    width: 220px;
+    height: max-content;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #ffffff;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+.imagenP img {
+    width: 150px;
+}

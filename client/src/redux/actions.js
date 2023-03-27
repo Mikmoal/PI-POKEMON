@@ -21,7 +21,7 @@ export const getPokemons = () => async (dispatch) => {
       });
     })
     .catch((error) => {
-      console.log(error);
+      return error;
     });
 };
 
@@ -52,7 +52,7 @@ export const getPokemonId = (id) => async (dispatch) => {
       });
     });
   } catch (error) {
-    console.log(error);
+    return error;
   }
 };
 
