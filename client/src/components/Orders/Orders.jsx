@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import { orderBy } from "../../redux/actions";
 import { A_Z, Z_A } from "../constantes/order";
+import style from "./Orders.module.css";
 
 export default function Order(){
     const dispatch = useDispatch()

@@ -7,23 +7,23 @@ import { getTypes, createPokemon, getPokemons, clean } from "../../redux/actions
 
 const Cards = () => {
     const pokemonsArr = useSelector(state => state.pokemons)
-    let dispatch = useDispatch();
+    // let dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(getPokemons());
-        dispatch(clean())
-    }, [dispatch])
+    // useEffect(() => {
+    //     dispatch(getPokemons());
+    //     dispatch(clean())
+    // }, [dispatch])
 
-    const [currentPage, setCurrentPage] = useState(1);
-    const [postPerPage] = useState(8);
-
-
-    const indexOfLastPost = currentPage * postPerPage;
-    const indexOfFirstPost = indexOfLastPost - postPerPage;
-    const currentPosts = pokemonsArr.slice(indexOfFirstPost, indexOfLastPost);
+    // const [currentPage, setCurrentPage] = useState(1);
+    // const [postPerPage] = useState(8);
 
 
-    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+    // const indexOfLastPost = currentPage * postPerPage;
+    // const indexOfFirstPost = indexOfLastPost - postPerPage;
+    // const currentPosts = pokemonsArr.slice(indexOfFirstPost, indexOfLastPost);
+
+
+    // const paginate = (pageNumber) => setCurrentPage(pageNumber);
     return (
         <div className={style.mainContainer}>
             {pokemonsArr.map(pokemon => {

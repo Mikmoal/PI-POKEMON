@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
 import { filterPokemon } from "../../redux/actions";
+import style from "./FilterPokemons.module.css";
 
 export default function FilterPokemons(){
     const dispatch = useDispatch();

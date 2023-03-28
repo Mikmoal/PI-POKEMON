@@ -15,7 +15,7 @@ function App() {
       
        <Route exact path="/" component={Landing} />
        <Route exact path="/home" component={Home} />
-       <Route exact path="/home/:id" component={Detail} />    
+       <Route exact path="/home/:id" component={Detail} />  
        <Route exact path="/newPokemon" component={Form} />
      
     </div>

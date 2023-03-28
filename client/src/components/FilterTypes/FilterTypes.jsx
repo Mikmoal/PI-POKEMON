@@ -1,11 +1,17 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { filterType, getTypes } from "../../redux/actions";
+import style from "./FilterTypes.module.css";
 
 
 export default function FilterTypes({paginate}){
-    const typesState = useSelector((state)=> state.types)
     const dispatch = useDispatch();
+    useEffect(()=>{
+        dispatch(getTypes());
+        }, [dispatch])
+
+    const typesState = useSelector((state)=> state.types)
+    console.log(typesState);
     
     const typesOrder = typesState.sort((a, b) => { //se ordena alfabeticamente para que salga bien en el select
         if (a.name > b.name) { return 1; }
@@ -13,10 +19,6 @@ export default function FilterTypes({paginate}){
         return 0;
       })
    
-    
-    useEffect(()=>{
-        dispatch(getTypes());
-        }, [dispatch])
     
     function onFilterTypes(e){
         e.preventDefault()

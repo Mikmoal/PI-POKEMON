@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import SearchBar from "../SearchBar/SearchBar";
 import FilterTypes from "../FilterTypes/FilterTypes";
-import Orders from '..Orders';
+import Orders from '../Orders/Orders';
 import FilterPokemons from '../FilterPokemons/FilterPokemons'; //aqui crear componentes restantes
 import style from "./NavBar.module.css"
 
