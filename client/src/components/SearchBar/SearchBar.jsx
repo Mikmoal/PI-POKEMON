@@ -9,7 +9,7 @@ export default function SearchPokemon({ paginate }) {
 
     function onSubmit(e) {
         e.preventDefault();
-        if (!search) return alert('Pokemon is required')
+        
         dispatch(getPokemonName(search))
         setSearch('')
     }
@@ -19,11 +19,8 @@ export default function SearchPokemon({ paginate }) {
         setSearch(e.target.value)
         paginate(1)
     }
-
-
     return (
         <div>
-
             <form onSubmit={onSubmit} action="">
                 <input type="search" name="search" onChange={onInputChange} pattern=".*\S.*" required />
                     <button className={style.search_btn} type="submit">
