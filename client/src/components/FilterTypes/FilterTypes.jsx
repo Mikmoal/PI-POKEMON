@@ -11,7 +11,7 @@ export default function FilterTypes({paginate}){
         }, [dispatch])
 
     const typesState = useSelector((state)=> state.typesState)
-    console.log(typesState instanceof Array);
+    //console.log(typesState instanceof Array); true
     
     const typesOrder = typesState.sort((a, b) => { //se ordena alfabeticamente para que salga bien en el select
         if (a.name > b.name) { return 1; }

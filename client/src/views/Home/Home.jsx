@@ -27,7 +27,7 @@ function Home() {
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-
+  
   return (
     <div className="Home">
       <h1>View of Home page</h1>

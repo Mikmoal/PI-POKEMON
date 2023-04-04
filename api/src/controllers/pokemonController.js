@@ -2,21 +2,43 @@ require("dotenv").config();
 const axios = require("axios");
 const { Pokemon, Type } = require("../db");
 
-
 const getPokemonApiInfo = async () => {
   const apiPokemons = (
     await axios.get(`https://pokeapi.co/api/v2/pokemon?limit=20`)
   ).data.results;
 
   const apiDetailed2 = [];
+
   for (let index = 0; index < apiPokemons.length; index++) {
     const pokemonDetailed = (await axios.get(apiPokemons[index].url)).data;
+    
     const types = pokemonDetailed.types.map((el) => {
       return el.type.name;
     });
+
+    const hpIndex = pokemonDetailed.stats.findIndex(
+      (el) => el.stat.name === "hp"
+    );
+    const attackIndex = pokemonDetailed.stats.findIndex(
+      (el) => el.stat.name === "attack"
+    );
+    const defenseIndex = pokemonDetailed.stats.findIndex(
+      (el) => el.stat.name === "defense"
+    );
+    const speedIndex = pokemonDetailed.stats.findIndex(
+      (el) => el.stat.name === "speed"
+    );
+
     const pokemon = {
+      id: pokemonDetailed.id,
       image: pokemonDetailed.sprites.other.home.front_default,
       name: pokemonDetailed.name,
+      height: pokemonDetailed.height,
+      weight: pokemonDetailed.weight,
+      life: pokemonDetailed.stats[hpIndex].base_stat,
+      attack: pokemonDetailed.stats[attackIndex].base_stat,
+      defense: pokemonDetailed.stats[defenseIndex].base_stat,
+      speed: pokemonDetailed.stats[speedIndex].base_stat,
       types: types,
     };
     apiDetailed2.push(pokemon);
