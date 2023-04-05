@@ -19,8 +19,9 @@ const getByNamePokemon = async (req, res) => {
 
 const getByIdPokemon = async (req, res) => {
   const { id } = req.params;
-  // console.log(typeof id);
+  
   const source = (typeof id === "string") ? "api" : "db";
+  
   try {
     const pokemon = await getPokemonById(id, source);
     res.status(200).json(pokemon);

@@ -14,7 +14,7 @@ import { A_Z, Z_A } from "../constants";
 
 const initialState = {
   pokemons: [],
-  pokemonsDetail: [],
+  pokemonsDetail: {},
   pokemonsClean: [],
   typesState: [],
   empty: [],
@@ -93,6 +93,7 @@ const reducer = (state = initialState, action) => {
         pokemons: aux,
       };
     case DETAIL_POKEMONS:
+      console.log(action.payload)
       return {
         ...state,
         pokemonsDetail: action.payload,

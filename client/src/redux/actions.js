@@ -42,9 +42,6 @@ export const getPokemonName = (name) => async (dispatch) => {
 
 export const getPokemonId = (id) => async (dispatch) => {
   try {
-    // dispatch({
-    //     type: LOADING
-    // })
     await axios.get(`http://localhost:3001/pokemons/${id}`).then((response) => {
       dispatch({
         type: DETAIL_POKEMONS,

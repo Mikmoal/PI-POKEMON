@@ -1,20 +1,21 @@
-import { Route, useLocation } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import './App.css';
-import NavBar from './components/NavBar/NavBar';
+// import NavBar from './components/NavBar/NavBar';
 import { Landing, Home, Detail, Form } from "./views";
-import { useState } from "react";
+// import { useState } from "react";
 
 function App() {
-  const location = useLocation();
+  // const location = useLocation();
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const [postPerPage] = useState(12);
+  // const [currentPage, setCurrentPage] = useState(1);
+  // const [postPerPage] = useState(12);
 
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  // const paginate = (pageNumber) => setCurrentPage(pageNumber);
   return (
     <div className="App">
 
-      {location.pathname !== "/" && <NavBar paginate={paginate} />}
+      {/* {location.pathname !== "/" && <NavBar paginate={paginate} />} */}
+      {/* {location.pathname !== "/" && <NavBar />} */}
       <h1>Henry Pokemon</h1>
 
       

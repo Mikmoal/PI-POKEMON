@@ -1,6 +1,7 @@
 import Card from "../../components/Card/Card";
 import style from "../../components/Cards/Cards.module.css"
 import Pagination from "../../components/Pagination/Pagination";
+import NavBar from "../../components/NavBar/NavBar";
 import loading from "../../loading.gif";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux"
@@ -30,6 +31,7 @@ function Home() {
   
   return (
     <div className="Home">
+      <NavBar paginate={paginate} />
       <h1>View of Home page</h1>
 
       <div className={style.paginado}>
