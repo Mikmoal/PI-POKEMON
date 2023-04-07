@@ -1,7 +1,23 @@
-.mainContainer{
+.mainContainer {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    border-radius: 15px;
-    border: 1px solid black;
+    align-items: center;
+    background-color: #ffc107;
+    padding: 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 10px;
+}
+
+.mainContainer a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 20px;
+    transition: all 0.3s ease-in-out;
+}
+
+.mainContainer a:hover {
+    color: #ff5722;
+    transform: scale(1.1);
 }

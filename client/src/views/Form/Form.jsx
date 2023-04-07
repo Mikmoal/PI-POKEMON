@@ -1,4 +1,6 @@
 import { useForm } from "../../hook/useForm.js";
+import { Link } from "react-router-dom"
+import style from "./Form.module.css";
 
 const initialForm = {
   name: "",
@@ -83,7 +85,7 @@ const validationsForm = (form) => {
     errors.types = "Se requiere mínimo un tipo"
   }
 
-    return errors
+  return errors
 }
 
 function Form() {
@@ -98,89 +100,94 @@ function Form() {
     handleSubmit,
   } = useForm(initialForm, validationsForm); // useForm tiene los valores iniciales del formulario y la validaciones
 
-  
+
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>Nombre</label>
-        <input type="text" onChange={handleChange} onBlur={handleBlur} name="name" value={form.name} />
-        {errors.name && <span>{errors.name}</span>}
+    <div>
+      <div className={style.mainContainer}>
+        <Link to="/home">Home</Link>
       </div>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label>Nombre </label>
+          <input type="text" onChange={handleChange} onBlur={handleBlur} name="name" value={form.name} />
+          {errors.name && <span>{errors.name}</span>}
+        </div>
 
-      <div>
-        <label>Imagen</label>
-        <input                                          //input image
-          type="text"
-          name="image"
-          placeholder="image or url-image"
-          onBlur={handleBlur}
-          onChange={handleChange}
-          value={form.image}
-          require='true'
-        />
-        {errors.image && <p>{errors.image}</p>}
-      </div>
+        <div>
+          <label>Imagen </label>
+          <input                                          //input image
+            type="text"
+            name="image"
+            placeholder="image or url-image"
+            onBlur={handleBlur}
+            onChange={handleChange}
+            value={form.image}
+            require='true'
+          />
+          {errors.image && <span>{errors.image}</span>}
+        </div>
 
-      <div>
-        <label>Vida</label>
-        <input type="text" value={form.life} onBlur={handleBlur} onChange={handleChange} require='true' name="life" />
-        {errors.life && <p>{errors.life}</p>}
-      </div>
+        <div>
+          <label>Vida </label>
+          <input type="text" value={form.life} onBlur={handleBlur} onChange={handleChange} require='true' name="life" />
+          {errors.life && <span>{errors.life}</span>}
+        </div>
 
-      <div>
-        <label>Ataque</label>
-        <input type="text" value={form.attack} onBlur={handleBlur} onChange={handleChange} require='true' name="attack" />
-        {errors.attack && <p>{errors.attack}</p>}
-      </div>
+        <div>
+          <label>Ataque </label>
+          <input type="text" value={form.attack} onBlur={handleBlur} onChange={handleChange} require='true' name="attack" />
+          {errors.attack && <span>{errors.attack}</span>}
+        </div>
 
-      <div>
-        <label>Defensa</label>
-        <input type="text" value={form.defense} onBlur={handleBlur} onChange={handleChange} require='true' name="defense" />
-        {errors.defense && <p>{errors.defense}</p>}
-      </div>
+        <div>
+          <label>Defensa </label>
+          <input type="text" value={form.defense} onBlur={handleBlur} onChange={handleChange} require='true' name="defense" />
+          {errors.defense && <span>{errors.defense}</span>}
+        </div>
 
-      <div>
-        <label>Velocidad (si tiene)</label>
-        <input type="text" value={form.speed} onBlur={handleBlur} onChange={handleChange} require='true' name="speed" />
-        {errors.speed && <p>{errors.speed}</p>}
-      </div>
+        <div>
+          <label>Velocidad (si tiene) </label>
+          <input type="text" value={form.speed} onBlur={handleBlur} onChange={handleChange} require='true' name="speed" />
+          {errors.speed && <span>{errors.speed}</span>}
+        </div>
 
-      <div>
-        <label>Altura (si tiene)</label>
-        <input type="text" value={form.height} onBlur={handleBlur} onChange={handleChange} require='true' name="height" />
-        {errors.height && <p>{errors.height}</p>}
-      </div>
+        <div>
+          <label>Altura (si tiene) </label>
+          <input type="text" value={form.height} onBlur={handleBlur} onChange={handleChange} require='true' name="height" />
+          {errors.height && <span>{errors.height}</span>}
+        </div>
 
-      <div>
-        <label>Peso (si tiene)</label>
-        <input type="text" value={form.weight} onBlur={handleBlur} onChange={handleChange} require='true' name="weight" />
-        {errors.weight && <p>{errors.weight}</p>}
-      </div>
+        <div>
+          <label>Peso (si tiene) </label>
+          <input type="text" value={form.weight} onBlur={handleBlur} onChange={handleChange} require='true' name="weight" />
+          {errors.weight && <span>{errors.weight}</span>}
+        </div>
 
-      <div>
+        <div>
 
-        <label>Tipo(s)</label>
-        <select onChange={handleTypes} onBlur={handleBlur} defaultValue={'Chose an option'}>
-          <option >Types</option>
-          {type.map((e, index) => (
-            <option value={e.name} name='types' key={index}>{e.name}</option>
+          <label>Tipo(s) </label>
+          <select onChange={handleTypes} onBlur={handleBlur} defaultValue={'Chose an option'}>
+            <option >Types</option>
+            {type.map((e, index) => (
+              <option value={e.name} name='types' key={index}>{e.name}</option>
+            ))}
+          </select>
+
+          {errors.types && <span>{errors.types}</span>}
+
+        </div>
+
+        <div>
+          {form.types.map((c, index) => (
+            <button value={c} onClick={removeTypes} key={index}>x  {c}</button>
           ))}
-        </select>
+        </div>
 
-        {errors.types && <p>{errors.types}</p>}
-
-      </div>
-
-      <div>
-        {form.types.map((c, index) => (
-          <button value={c}  onClick={removeTypes} key={index}>x  {c}</button>
-        ))}
-      </div>
-
-      <div>
-        <input type="submit" value="Create" />
-      </div>
-    </form>
+        <div>
+          <input type="submit" value="Create" />
+        </div>
+      </form>
+    </div>
   )
 }
 

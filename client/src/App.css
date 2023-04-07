@@ -36,3 +36,7 @@
     transform: rotate(360deg);
   }
 }
+
+select {
+  font-family: "Helvetica Neue", sans-serif;
+}

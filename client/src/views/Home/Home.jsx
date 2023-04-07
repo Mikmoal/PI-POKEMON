@@ -1,5 +1,5 @@
 import Card from "../../components/Card/Card";
-import style from "../../components/Cards/Cards.module.css"
+import style from "./Home.module.css";
 import Pagination from "../../components/Pagination/Pagination";
 import NavBar from "../../components/NavBar/NavBar";
 import loading from "../../loading.gif";
@@ -45,7 +45,9 @@ function Home() {
 
 
       {pokemonsArr.length === 0 ? (
-        <div className={style.loading}><img src={loading} width='150px' alt='loading' /> </div>) :
+        <div className={style.loading}>
+          <img width='50px' src={loading} alt='loading' />
+        </div>) :
         (
           <div>
             {currentPosts.map(e => (

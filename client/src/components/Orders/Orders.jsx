@@ -3,20 +3,25 @@ import { orderBy } from "../../redux/actions";
 import { A_Z, Z_A } from "../constantes/order";
 import style from "./Orders.module.css";
 
-export default function Order(){
+export default function Order() {
     const dispatch = useDispatch()
 
-    function onSelectChange(e){
+    function onSelectChange(e) {
         dispatch(orderBy(e.target.value))
     }
 
     return (
-        <div>
-            <select onChange={onSelectChange} className={style.select}>
+        <div className={style.select}>
+            <select onChange={onSelectChange} >
                 <option defaultValue>Order By</option>
                 <option value={A_Z}>Order A - Z</option>
                 <option value={Z_A}>Order Z - A</option>
             </select>
+            <ul>
+                <li defaultValue>Order By</li>
+                <li value={A_Z}>Order A - Z</li>
+                <li value={Z_A}>Order Z - A</li>
+            </ul>
         </div>
     )
 }
