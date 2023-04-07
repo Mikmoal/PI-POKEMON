@@ -106,7 +106,7 @@ function Form() {
       <div className={style.mainContainer}>
         <Link to="/home">Home</Link>
       </div>
-      <form onSubmit={handleSubmit}>
+      <form className={style.formulario} onSubmit={handleSubmit}>
         <div>
           <label>Nombre </label>
           <input type="text" onChange={handleChange} onBlur={handleBlur} name="name" value={form.name} />
