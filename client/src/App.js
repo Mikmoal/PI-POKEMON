@@ -16,7 +16,7 @@ function App() {
 
       {/* {location.pathname !== "/" && <NavBar paginate={paginate} />} */}
       {/* {location.pathname !== "/" && <NavBar />} */}
-      <h1>H. P.</h1>
+      {/* <h1>H. P.</h1> */}
 
       
       

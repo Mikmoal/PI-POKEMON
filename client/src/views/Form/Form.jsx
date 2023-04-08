@@ -103,90 +103,103 @@ function Form() {
 
   return (
     <div>
-      <div className={style.mainContainer}>
+      <div className={style.nav}>
         <Link to="/home">Home</Link>
       </div>
-      <form className={style.formulario} onSubmit={handleSubmit}>
-        <div>
-          <label>Nombre </label>
-          <input type="text" onChange={handleChange} onBlur={handleBlur} name="name" value={form.name} />
-          {errors.name && <span>{errors.name}</span>}
-        </div>
+      <div className={style.container}>
+        <form className={style.formulario} onSubmit={handleSubmit}>
+          <div>
+            <label>Nombre </label>
+            <input type="text" onChange={handleChange} onBlur={handleBlur} name="name" value={form.name} />
+            {errors.name && <span>{errors.name}</span>}
+          </div>
 
-        <div>
-          <label>Imagen </label>
-          <input                                          //input image
-            type="text"
-            name="image"
-            placeholder="image or url-image"
-            onBlur={handleBlur}
-            onChange={handleChange}
-            value={form.image}
-            require='true'
-          />
-          {errors.image && <span>{errors.image}</span>}
-        </div>
+          <div>
+            <label>Imagen </label>
+            <input                                          //input image
+              type="text"
+              name="image"
+              placeholder="image or url-image"
+              onBlur={handleBlur}
+              onChange={handleChange}
+              value={form.image}
+              require='true'
+            />
+            {errors.image && <span>{errors.image}</span>}
+          </div>
 
-        <div>
-          <label>Vida </label>
-          <input type="text" value={form.life} onBlur={handleBlur} onChange={handleChange} require='true' name="life" />
-          {errors.life && <span>{errors.life}</span>}
-        </div>
+          <div>
+            <label>Vida </label>
+            <input type="text" value={form.life} onBlur={handleBlur} onChange={handleChange} require='true' name="life" />
+            {errors.life && <span>{errors.life}</span>}
+          </div>
 
-        <div>
-          <label>Ataque </label>
-          <input type="text" value={form.attack} onBlur={handleBlur} onChange={handleChange} require='true' name="attack" />
-          {errors.attack && <span>{errors.attack}</span>}
-        </div>
+          <div>
+            <label>Ataque </label>
+            <input type="text" value={form.attack} onBlur={handleBlur} onChange={handleChange} require='true' name="attack" />
+            {errors.attack && <span>{errors.attack}</span>}
+          </div>
 
-        <div>
-          <label>Defensa </label>
-          <input type="text" value={form.defense} onBlur={handleBlur} onChange={handleChange} require='true' name="defense" />
-          {errors.defense && <span>{errors.defense}</span>}
-        </div>
+          <div>
+            <label>Defensa </label>
+            <input type="text" value={form.defense} onBlur={handleBlur} onChange={handleChange} require='true' name="defense" />
+            {errors.defense && <span>{errors.defense}</span>}
+          </div>
 
-        <div>
-          <label>Velocidad (si tiene) </label>
-          <input type="text" value={form.speed} onBlur={handleBlur} onChange={handleChange} require='true' name="speed" />
-          {errors.speed && <span>{errors.speed}</span>}
-        </div>
+          <div>
+            <label>Velocidad (si tiene) </label>
+            <input type="text" value={form.speed} onBlur={handleBlur} onChange={handleChange} require='true' name="speed" />
+            {errors.speed && <span>{errors.speed}</span>}
+          </div>
 
-        <div>
-          <label>Altura (si tiene) </label>
-          <input type="text" value={form.height} onBlur={handleBlur} onChange={handleChange} require='true' name="height" />
-          {errors.height && <span>{errors.height}</span>}
-        </div>
+          <div>
+            <label>Altura (si tiene) </label>
+            <input type="text" value={form.height} onBlur={handleBlur} onChange={handleChange} require='true' name="height" />
+            {errors.height && <span>{errors.height}</span>}
+          </div>
 
-        <div>
-          <label>Peso (si tiene) </label>
-          <input type="text" value={form.weight} onBlur={handleBlur} onChange={handleChange} require='true' name="weight" />
-          {errors.weight && <span>{errors.weight}</span>}
-        </div>
+          <div>
+            <label>Peso (si tiene) </label>
+            <input type="text" value={form.weight} onBlur={handleBlur} onChange={handleChange} require='true' name="weight" />
+            {errors.weight && <span>{errors.weight}</span>}
+          </div>
 
-        <div>
+          <div>
 
-          <label>Tipo(s) </label>
-          <select onChange={handleTypes} onBlur={handleBlur} defaultValue={'Chose an option'}>
-            <option >Types</option>
-            {type.map((e, index) => (
-              <option value={e.name} name='types' key={index}>{e.name}</option>
+            <label>Tipo(s) </label>
+            <select onChange={handleTypes} onBlur={handleBlur} defaultValue={'Chose an option'}>
+              <option >Types</option>
+              {type.map((e, index) => (
+                <option value={e.name} name='types' key={index}>{e.name}</option>
+              ))}
+            </select>
+
+            {errors.types && <span>{errors.types}</span>}
+
+          </div>
+
+          <div>
+            {form.types.map((c, index) => (
+              <button value={c} onClick={removeTypes} key={index}>x  {c}</button>
             ))}
-          </select>
+          </div>
 
-          {errors.types && <span>{errors.types}</span>}
+          <div className={style.centralized}>
+            <button className={style.back_btn}>
+              <span>Back</span>
+            </button>
 
-        </div>
+            <div>
+              <input type="submit" value="Create" />
+            </div>
 
-        <div>
-          {form.types.map((c, index) => (
-            <button value={c} onClick={removeTypes} key={index}>x  {c}</button>
-          ))}
-        </div>
+          </div>
 
-        <div>
-          <input type="submit" value="Create" />
-        </div>
-      </form>
+
+
+        </form>
+      </div>
+
     </div>
   )
 }
