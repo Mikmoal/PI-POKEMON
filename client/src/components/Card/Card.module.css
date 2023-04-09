@@ -38,15 +38,15 @@
     color: #437A16;
 }
 
-.imagenP a:focus {
+/* .imagenP a:focus { */
     /* border-bottom: 1px solid; */
     /* background: #BAE498; */
-}
+/* } */
 
-.imagenP a:hover {
+/* .imagenP a:hover { */
     /* border-bottom: 1px solid; */
     /* background: #CDFEAA; */
-}
+/* } */
 
 .imagenP a:active {
     background: #265301;
