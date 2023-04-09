@@ -30,11 +30,11 @@ function Home() {
 
   
   return (
-    <div className="Home">
+    <div>
       <NavBar paginate={paginate} />
-      <h1>View of Home page</h1>
+      
 
-      <div className={style.paginado}>
+      <div>
         <Pagination
           postPerPage={postPerPage}
           totalPost={pokemonsArr.length}
@@ -49,7 +49,7 @@ function Home() {
           <img width='50px' src={loading} alt='loading' />
         </div>) :
         (
-          <div>
+          <div className={style.allCards}>
             {currentPosts.map(e => (
             <Card
             key={e.id}

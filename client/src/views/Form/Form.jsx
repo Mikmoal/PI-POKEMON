@@ -186,7 +186,7 @@ function Form() {
 
           <div className={style.centralized}>
             <button className={style.back_btn}>
-              <span>Back</span>
+              <Link to="/home"><span>Back</span></Link>
             </button>
 
             <div>
