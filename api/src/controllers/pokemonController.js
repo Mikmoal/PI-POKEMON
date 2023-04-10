@@ -50,7 +50,7 @@ const getPokemonApiInfo = async () => {
 const getPokemonDbInfo = async () => {
   const dbPokemons = await Pokemon.findAll({
     include: {
-      attributes: ["name"],
+      attributes: ["id"],
       model: Type,
       through: {
         attributes: [],
@@ -77,7 +77,7 @@ const getPokemonDbInfo = async () => {
 };
 
 const getAllPokemons = async () => {
-  const dbPokemons = getPokemonDbInfo();
+  // const dbPokemons = getPokemonDbInfo();
   const apiPokemons = getPokemonApiInfo();
 
   return apiPokemons;
@@ -124,7 +124,7 @@ const createPokemonController = async (
   weight,
   types
 ) => {
-  const newPokemon = await Pokemon.create({
+  const newPokemon = (await Pokemon.create({
     name,
     image,
     life,
@@ -133,8 +133,8 @@ const createPokemonController = async (
     speed,
     height,
     weight,
-  });
-  await newPokemon.addType(types);
+  })).addType(types);
+  // await newPokemon.addType(types);
 
   return newPokemon;
 };

@@ -29,10 +29,10 @@ export const useForm = (initialForm, validateForm) => {
     }
     return 0;
   });
-  console.log(type);
+  // console.log(type);
 
   var namePokemon = useSelector((state) => state.pokemonsClean);
-  console.log(namePokemon);
+  // console.log(namePokemon);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -59,7 +59,7 @@ export const useForm = (initialForm, validateForm) => {
     } else {
       setForm({
         ...form,
-        types: [...form.types, e.target.value],
+        types: [...form.types, parseInt(e.target.value)],
       });
     }
   };

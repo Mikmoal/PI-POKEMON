@@ -167,10 +167,10 @@ function Form() {
           <div>
 
             <label>Tipo(s) </label>
-            <select onChange={handleTypes} onBlur={handleBlur} defaultValue={'Chose an option'}>
+            <select onChange={handleTypes} onBlur={handleBlur} defaultValue={'Choose an option'}>
               <option >Types</option>
               {type.map((e, index) => (
-                <option value={e.name} name='types' key={index}>{e.name}</option>
+                <option value={e.id} name={e.name} key={index}>{e.name}</option>
               ))}
             </select>
 
@@ -179,9 +179,12 @@ function Form() {
           </div>
 
           <div>
-            {form.types.map((c, index) => (
-              <button value={c} onClick={removeTypes} key={index}>x  {c}</button>
-            ))}
+            {form.types.map((c, index) => {
+              const found = type.find(element => element.id === parseInt(c));
+              
+              return (<button value={found.id} onClick={removeTypes} key={index}>x  {found.name}</button>)
+            }
+            )}
           </div>
 
           <div className={style.centralized}>
