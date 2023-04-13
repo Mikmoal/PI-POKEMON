@@ -49,27 +49,29 @@ const getPokemonApiInfo = async () => {
 
 const getPokemonDbInfo = async () => {
   const dbPokemons = await Pokemon.findAll({
-    include: {
-      attributes: ["id"],
+    include: [{
       model: Type,
       through: {
         attributes: [],
       },
-    },
+    }]
   });
+  
 
   const dbInfo = dbPokemons.map((e) => {
+    const ptypes = e.dataValues.types.map((el) => el.dataValues.name)
+    // console.log(ptypes);
     return {
-      id: e.id,
-      name: e.name,
-      image: e.image,
-      life: e.life,
-      attack: e.attack,
-      defense: e.defense,
-      speed: e.speed,
-      height: e.height,
-      weight: e.weight,
-      types: e.types.map((el) => el.type.name).join(", "),
+      id: e.dataValues.id,
+      name: e.dataValues.name,
+      image: e.dataValues.image,
+      life: e.dataValues.life,
+      attack: e.dataValues.attack,
+      defense: e.dataValues.defense,
+      speed: e.dataValues.speed,
+      height: e.dataValues.height,
+      weight: e.dataValues.weight,
+      types: ptypes
     };
   });
 
@@ -77,10 +79,12 @@ const getPokemonDbInfo = async () => {
 };
 
 const getAllPokemons = async () => {
-  // const dbPokemons = getPokemonDbInfo();
-  const apiPokemons = getPokemonApiInfo();
+  const dbPokemons = await getPokemonDbInfo();
+  const apiPokemons = await getPokemonApiInfo();
 
-  return apiPokemons;
+  const allPokemons = dbPokemons.concat(apiPokemons);
+
+  return allPokemons
 };
 
 const searchPokemonByName = async (name) => {
